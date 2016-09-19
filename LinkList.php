@@ -33,7 +33,7 @@ class singeLinkList
     {
         $i = 0;
         $current = $this->header;
-        while ($current->name != null) {
+        while ($current->next != null) {
             $i++;
             $current = $current->next;
         }
