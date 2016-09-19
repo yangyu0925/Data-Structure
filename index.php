@@ -9,5 +9,5 @@ require_once 'ArrayList.php';
 
 $array = new ArrayList();
 $array->initList([1,2,3]);
-$array->deleteList(2);
+$array->deleteList(3);
 $array->printList();

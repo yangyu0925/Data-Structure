@@ -137,20 +137,18 @@ class ArrayList
      */
     public function insertList($i, $e)
     {
-        if ($i < 1 || $i > $this->length+1) {
-            die('插入元素位置错误');
+        if ($i < 1 || $i > $this->length +1) {
+            die('插入元素位置有误');
         }
         if ($this->length == 0) {
             $this->list[0] = $e;
-            $this->length++;
         } else {
-            $this->length++;
-            for ($j = $this->length - 1; $j >= $i; $j--) {
+            for ($j = $this->length; $j >= $i; $j--) {
                 $this->list[$j] = $this->list[$j-1];
             }
             $this->list[$i-1] = $e;
         }
-
+        $this->length++;
     }
 
     /**
@@ -159,15 +157,15 @@ class ArrayList
     public function deleteList($i)
     {
         if ($i < 1 || $i > $this->length) {
-            die('删除元素位置错误');
+            die('删除元素位置有误');
         }
         if ($i == $this->length) {
             unset($this->list[$i - 1]);
         } else {
             for ($j = $i; $j < $this->length; $j++) {
-                $this->list[$i-1] = $this->list[$j];
+                $this->list[$j-1] = $this->list[$j];
             }
-            unset($this->list[$i - 1]);
+            unset($this->list[$this->length-1]);
         }
         $this->length--;
     }
