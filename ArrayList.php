@@ -9,240 +9,178 @@
 class ArrayList
 {
     private $list;
-    private $size;
-
+    private $length;
 
     /**
-     * 构造函数
+     * ArrayList constructor.
      */
     public function __construct()
     {
         $this->list = [];
-        $this->size = 0;
+        $this->length = 0;
     }
 
-
     /**
-     *初始化
+     * @param array $array
      */
-    public function initList($array)
+    public function initList(array $array)
     {
         $this->list = $array;
-        $this->size = count($array);
+        $this->length = count($array);
     }
 
-
     /**
-     *删除
+     *
      */
-    public function destoryList()
+    public function destroyList()
     {
-        if (isset($this->list)) {
-            unset($this->list);
-            $this->size = 0;
-        }
+        unset($this->list);
+        $this->length = 0;
     }
 
-
     /**
-     *清空
+     *
      */
     public function clearList()
     {
-        if (isset($this->list)) {
-            unset($this->list);
-        }
         $this->list = [];
-        $this->size = 0;
+        $this->length = 0;
     }
 
-
     /**
-     * 判断是否为空
-     *
      * @return bool
      */
-    public function emptyList()
+    public function listEmpty()
     {
-        if (isset($this->list)) {
-            if ($this->size == 0) {
-                return true;
-            } else {
-                return false;
-            }
+        if (count($this->list) == 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
-
     /**
-     * 表长度
      * @return int
      */
-    public function lenghtList()
+    public function listLength()
     {
-        if (isset($this->list)) {
-            return $this->size;
-        }
+        return count($this->list);
     }
 
-
     /**
-     * 取元素
-     *
      * @param $i
      * @return mixed
      */
     public function getElem($i)
     {
-        if ($i < 1 || $i > $this->size) {
-            die('溢出');
+        if ($i < 1 || $i > $this->length){
+            die('元素不存在');
         }
-        if (isset($this->list) && is_array($this->list)) {
+        if ($this->list) {
             return $this->list[$i-1];
         }
     }
 
-
     /**
-     * 是否在表中
-     *
      * @param $e
      * @return int
      */
     public function locateElem($e)
     {
-        if (isset($this->list) && is_array($this->list)) {
-            for ($i=0; $i<$this->size; $i++) {
+        if ($this->list) {
+            for ($i = 0; $i<$this->length; $i++){
                 if ($this->list[$i] == $e) {
                     return $i+1;
                 }
             }
-
-            return 0;
         }
+        return 0;
     }
 
-
     /**
-     * 前驱
-     *
      * @param $i
      * @return mixed
      */
     public function priorElem($i)
     {
-        if ($i < 1 || $i > $this->size) {
-            die('溢出');
+        if ($i < 1 || $i > $this->length) {
+            die('元素不存在');
         }
-        if ($i == 1) {
-            die('没有前驱');
-        }
-        if (isset($this->list) && is_array($this->list)) {
+        if ($this->list) {
+            if ($i == 1) {
+                die('没有前驱');
+            }
             return $this->list[$i-2];
         }
     }
 
-
     /**
-     * 后继
-     *
      * @param $i
      * @return mixed
      */
     public function nextElem($i)
     {
-        if ($i < 1 || $i > $this->size) {
-            die('溢出');
+        if ($i < 1 || $i > $this->length) {
+            die('元素不存在');
         }
-        if ($i == $this->size) {
-            die('没有后继');
-        }
-        if (isset($this->list) && is_array($this->list)) {
+        if ($this->list) {
+            if ($i == $this->length) {
+                die('没后后继');
+            }
             return $this->list[$i];
         }
     }
 
-
     /**
-     * 插入元素
-     *
      * @param $i
      * @param $e
      */
     public function insertList($i, $e)
     {
-        if ($i < 1 || $i > $this->size+1) {
-            die('插入元素位置有误');
+        if ($i < 1 || $i > $this->length+1) {
+            die('插入元素位置错误');
         }
-        if (isset($this->list) && is_array($this->list)) {
-            if ($this->size == 0) {
-                $this->list[0] = $e;
-                $this->size++;
-            } else {
-                $this->size++;
-                for ($j = $this->size-1; $j >= $i; $j--){
-                    $this->list[$j] = $this->list[$j-1];
-                }
-                $this->list[$i-1] = $e;
+        if ($this->length == 0) {
+            $this->list[0] = $e;
+            $this->length++;
+        } else {
+            $this->length++;
+            for ($j = $this->length - 1; $j >= $i; $j--) {
+                $this->list[$j] = $this->list[$j-1];
             }
+            $this->list[$i-1] = $e;
         }
+
     }
 
-
     /**
-     * 删除元素
-     *
      * @param $i
      */
     public function deleteList($i)
     {
-        if ($i < 1 || $i > $this->size) {
-            die('删除元素位置有误');
+        if ($i < 1 || $i > $this->length) {
+            die('删除元素位置错误');
         }
-        if (isset($this->list) && is_array($this->list)) {
-            if ($this->size == $i) {
-                unset($this->list[$i-1]);
-            } else {
-                for ($j = $i; $j < $this->size; $j++) {
-                    $this->list[$j-1] = $this->list[$j];
-                }
-                unset($this->list[$this->size-1]);
+        if ($i == $this->length) {
+            unset($this->list[$i - 1]);
+        } else {
+            for ($j = $i; $j < $this->length; $j++) {
+                $this->list[$i-1] = $this->list[$j];
             }
-            $this->size--;
+            unset($this->list[$i - 1]);
         }
+        $this->length--;
     }
 
-
     /**
-     *便利线性表
+     *
      */
     public function printList()
     {
-        if (isset($this->list) && is_array($this->list)) {
-            foreach ($this->list as $item) {
-                echo $item;
-            }
+        foreach ($this->list as $value) {
+            echo $value.'<br>';
         }
     }
-
-    /**
-     * @return int
-     */
-    public function getSize()
-    {
-        return $this->size;
-    }
-
-    /**
-     * @return array
-     */
-    public function getList()
-    {
-        return $this->list;
-    }
-
-
-
 }
 
 
