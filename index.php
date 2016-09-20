@@ -15,7 +15,7 @@ $array->deleteList(4);
 $array->printList();
 */
 
-
+/*
 require_once 'LinkList.php';
 $list = new singelLinkList ();
 $list->addLink ( new node ('aaaaaa' ) );
@@ -40,7 +40,17 @@ $list->getLinkList();
 echo "<br/>";
 echo "所有链表节点：<br/>";
 $list->getLinkLength ();
+*/
 
-
+require_once 'CycleLinkList.php';
+$lists = new singelCycleLinkList (new node ( 1, 'aaaaaa' ));
+$lists->addLink ( new node ( 2, 'bbbbbb' ) );
+$lists->addLink ( new node ( 4, 'dddddd' ) );
+$lists->addLink ( new node ( 3, 'cccccc' ) );
+$lists->addLink ( new node ( 5, 'eeeeee' ) );
+$lists->addLink ( new node ( 6, 'ffffff' ) );
+echo $lists->getLinkList ();
+echo "<br>-----------约瑟夫节点--------------<br>";
+print_r($lists->getJoseph ( 1, 4 ));
 
 
