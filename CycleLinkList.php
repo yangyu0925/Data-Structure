@@ -29,22 +29,16 @@ class cycleLinkList
         $this->header->next = $this->header;
     }
 
-    /**
-     * @param $node
-     */
     public function addLink($node)
     {
         $current = $this->header;
-        $currentNext = $this->header->next;
-        if ($current == $currentNext) {
-            $currentNext->next = $node;
-            $node->next = $currentNext;
+        if ($current == $current->next) {
+            $current->next = $node;
+            $node->next = $this->header;
             return;
         }
-        while ($currentNext != $this->header) {
-
-            $current = $currentNext;
-            $currentNext = $currentNext->next;
+        while ($this->header != $current->next) {
+            $current = $current->next;
         }
         $current->next = $node;
         $node->next = $this->header;
