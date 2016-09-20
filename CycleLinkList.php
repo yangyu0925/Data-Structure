@@ -5,43 +5,108 @@
  * Date: 16/9/20
  * Time: 上午9:29
  */
-class node
+class Node
 {
     public $id;
-    public $name;
+    public $data;
     public $next;
 
-    public function __construct($id, $name)
+    public function __construct($id = null, $data = null)
     {
         $this->id = $id;
-        $this->name = $name;
+        $this->data = $data;
         $this->next = null;
     }
 }
 
-class cycleLinkList
+class CycleLinkList
 {
     public $header;
 
-    public function __construct($id = null, $name = null)
+    public function __construct(Node $node)
     {
-        $this->header = new node($id, $name);
+        $this->header = $node;
         $this->header->next = $this->header;
     }
 
-    public function addLink($node)
+    public function addLink(Node $node)
     {
         $current = $this->header;
-        if ($current == $current->next) {
-            $current->next = $node;
-            $node->next = $this->header;
-            return;
-        }
-        while ($this->header != $current->next) {
+        while ($current->next != $this->header) {
+            if ($current->next->id > $node->id){
+                break;
+            }
             $current = $current->next;
         }
+        $node->next = $current->next;
         $current->next = $node;
-        $node->next = $this->header;
+    }
+
+    public function getLinkList()
+    {
+        $current = $this->header;
+        if ($current->next == $this->header) {
+            echo '空链表!';
+            return;
+        }
+        while ($current->next != $this->header) {
+            echo 'id:'.$current->next->id.'数据:'.$current->next->data.'<br>';
+            $current = $current->next;
+        }
+    }
+
+    public function deleteLink($id)
+    {
+        $current = $this->header;
+        $flag = false;
+        while ($current->next != $this->header) {
+            if ($current->next->id == $id) {
+                $flag = true;
+                break;
+            }
+            $current = $current->next;
+        }
+        if ($flag) {
+            $current->next = $current->next->next;
+        } else {
+            echo'没有找到相应数据!<br>';
+        }
+    }
+
+    public function getLinkNameById($id)
+    {
+        $current = $this->header;
+        $flag = false;
+        while ($current->next != $this->header) {
+            if ($current->next->id == $id) {
+                $flag = true;
+                break;
+            }
+            $current = $current->next;
+        }
+        if ($flag) {
+            echo $current->next->data.'<br>';
+        } else {
+            echo'没有找到相应数据!<br>';
+        }
+    }
+
+    public function updateLink($id, $data)
+    {
+        $current = $this->header;
+        $flag = false;
+        while ($current->next != $this->header) {
+            if ($current->next->id == $id) {
+                $flag = true;
+                break;
+            }
+            $current = $current->next;
+        }
+        if ($flag) {
+            $current->next->data = $data;
+        } else {
+            echo'没有找到相应数据!<br>';
+        }
     }
 }
 

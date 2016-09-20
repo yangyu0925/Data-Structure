@@ -15,32 +15,32 @@ $array->deleteList(4);
 $array->printList();
 */
 
-/*
+
 require_once 'LinkList.php';
-$lists = new singeLinkList();
-$lists->addLink(new node(1, '1111111'));
-$lists->addLink(new node(7, '1111117'));
-$lists->addLink(new node(2, '1111112'));
-$lists->getLinkList();
-*/
+$list = new singelLinkList ();
+$list->addLink ( new node ('aaaaaa' ) );
+$list->addLink ( new node ('bbbbbb' ) );
+$list->addLink ( new node ('cccccc' ) );
+$list->addLink ( new node ('dddddd' ) );
+echo "所有链表节点：<br/>";
+$list->getLinkList();
+echo "<br/>";
+echo "当前链表末位节点：<br/>";
+$list->getCurrent();
+echo "<br/>";
+echo "修改链表节点id为0的：<br/>";
+$list->updateLink(0, '2222222');
+echo "查找id为0的节点：<br/>";
+$list->getLinkById(0);
+echo "<br/>";
+echo "删除链表节点id为0：<br/>";
+$list->delLink(0);
+echo "所有链表节点：<br/>";
+$list->getLinkList();
+echo "<br/>";
+echo "所有链表节点：<br/>";
+$list->getLinkLength ();
 
-require_once 'CycleLinkList.php';
-$lists = new cycleLinkList();
-$lists->addLink(new node(1, '1111'));
-$lists->addLink(new node(2, '2222'));
-$lists->addLink(new node(3, '3333'));
-$lists->addLink(new node(4, '4444'));
-$lists->addLink(new node(5, '5555'));
-$lists->addLink(new node(6, '6666'));
-$lists->addLink(new node(7, '7777'));
-$lists->addLink(new node(8, '8888'));
-$lists->addLink(new node(9, '9999'));
-$lists->addLink(new node(10, '1010'));
 
-$q = $lists->header->next;
-while ($q != $lists->header) {
-    echo $q->name.'<br>';
-    $q = $q->next;
-}
 
 

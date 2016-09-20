@@ -1,63 +1,46 @@
 <?php
-/**
- * 单链表
- * User: yangyu
- * Date: 16/9/19
- * Time: 下午5:19
- */
+header("Content-type:text/html;charset=utf-8");
+//链表节点
+class node {
+    public static $count = -1; //自增ID 初始header，节点索引从0开始
+    public $name; //节点名称
+    public $next; //下一节点
+    public $id; //节点ID
 
-class node
-{
-    public $id;
-    public $name;
-    public $next;
-
-    public function __construct($id, $name)
-    {
-        $this->id = $id;
+    public function __construct($name) {
+        $this->id = self::$count;
         $this->name = $name;
         $this->next = null;
+        self::$count += 1;
     }
 }
-
-class singeLinkList
-{
+//单链表
+class singelLinkList {
     private $header;
+    private $current;
+    public $count;
 
-    public function __construct($id = null, $name = null)
-    {
-        $this->header = new node($id, $name, null);
+    //构造方法
+    public function __construct($data = null) {
+        $this->header = new node ($data);
+        $this->current = $this->header;
+        $this->count = 0;
     }
 
-    public function getLinkLength()
-    {
-        $i = 0;
-        $current = $this->header;
-        while ($current->next != null) {
-            $i++;
-            $current = $current->next;
-        }
-        return $i;
+    //添加节点数据
+    public function addLink($node) {
+        if($this->current->next != null)
+            $this->current = $this->current->next;
+        $this->count++;
+        $node->next = $this->current->next;
+        $this->current->next = $node;
     }
 
-    public function addLink($node)
-    {
-        $current = $this->header;
-        while ($current->next != null) {
-            if ($current->next->id > $node->id) {
-                break;
-            }
-            $current = $current->next;
-        }
-        $node->next = $current->next;
-        $current->next = $node;
-    }
-
-    public function deleteLink($id)
-    {
+    //删除链表节点
+    public function delLink($id) {
         $current = $this->header;
         $flag = false;
-        while ($current->next != null) {
+        while ( $current->next != null ) {
             if ($current->next->id == $id) {
                 $flag = true;
                 break;
@@ -65,50 +48,67 @@ class singeLinkList
             $current = $current->next;
         }
         if ($flag) {
+            $this->count--;
             $current->next = $current->next->next;
         } else {
-            echo '未找到id='. $id .'的节点!<br>';
+            echo "未找到id=" . $id . "的节点！<br>";
         }
     }
 
-    public function getLinkList()
-    {
+    //获取链表
+    public function getLinkList() {
+        $this->checkNull();
         $current = $this->header;
-        if ($current->next == null) {
-            return '链表为空';
-        }
-        while ($current->next != null) {
-            echo 'id'.$current->next->id.' name:'.$current->next->name.'<br>';
-            if ($current->next->next == null){
+        while ( $current->next != null ) {
+            echo 'id:' . $current->next->id . '   name:' . $current->next->name . "<br>";
+            if ($current->next->next == null) {
                 break;
             }
             $current = $current->next;
         }
     }
 
-    public function getLinkNameById($id)
+    //获取长度
+    public function getLinkLength()
     {
-        $current = $this->header;
-        if ($current->next == null) {
-            return '链表为空';
+        echo $this->count;
+    }
+
+    //获取当前节点
+    public function getCurrent()
+    {
+        $this->checkNull();
+        echo '当前节点id:' . $this->current->next->id . '   name:' . $this->current->next->name . "<br>";
+    }
+
+    //判断是否为空
+    public function checkNull()
+    {
+        if ($this->header->next == null) {
+            echo "链表为空!";
+            exit;
         }
-        while ($current->next != null) {
+    }
+
+    //获取节点名字
+    public function getLinkById($id) {
+        $this->checkNull();
+        $current = $this->header;
+        while ( $current->next != null ) {
             if ($current->id == $id) {
                 break;
             }
             $current = $current->next;
         }
-        return $current->name;
+        echo '修改后id:' . $current->id . '   name:' . $current->name . "<br>";
     }
 
-    public function updateLink($id, $name)
-    {
+    //更新节点名称
+    public function updateLink($id, $name) {
+        $this->checkNull();
         $current = $this->header;
-        if ($current->next == null) {
-            return '链表为空';
-        }
-        while ($current->next != null) {
-            if ($current->id == $this) {
+        while ( $current->next != null ) {
+            if ($current->id == $id) {
                 break;
             }
             $current = $current->next;
