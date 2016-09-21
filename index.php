@@ -42,6 +42,7 @@ echo "所有链表节点：<br/>";
 $list->getLinkLength ();
 */
 
+/*
 require_once 'CycleLinkList.php';
 $lists = new singelCycleLinkList (new node ( 1, 'aaaaaa' ));
 $lists->addLink ( new node ( 2, 'bbbbbb' ) );
@@ -52,5 +53,17 @@ $lists->addLink ( new node ( 6, 'ffffff' ) );
 echo $lists->getLinkList ();
 echo "<br>-----------约瑟夫节点--------------<br>";
 print_r($lists->getJoseph ( 1, 4 ));
+*/
 
+require_once 'Stack.php';
+$list = new Stack([1,2,3]);
+$list->push(4);
+$list->push(5);
+$list->push(6);
+$list->pop();
+echo $list->getTop();
+$list->pop();
+echo $list->stackLength();
+var_dump($list->emptyStack());
+var_dump($list->stackTraverse());
 
