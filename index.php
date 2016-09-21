@@ -55,6 +55,7 @@ echo "<br>-----------约瑟夫节点--------------<br>";
 print_r($lists->getJoseph ( 1, 4 ));
 */
 
+/*
 require_once 'Stack.php';
 $list = new Stack([1,2,3]);
 $list->push(4);
@@ -66,4 +67,20 @@ $list->pop();
 echo $list->stackLength();
 var_dump($list->emptyStack());
 var_dump($list->stackTraverse());
+ */
+
+require_once 'singelStack.php';
+$list = new SingelStack();
+$list->push(new Node(1));
+
+
+
+
+echo $list->getTop();
+
+var_dump($list->stackTraverse());
+
+
+
+
 
