@@ -69,16 +69,17 @@ var_dump($list->emptyStack());
 var_dump($list->stackTraverse());
  */
 
+/*
 require_once 'singelStack.php';
 $list = new SingelStack();
 $list->push(new Node(1));
-
-
-
-
 echo $list->getTop();
-
 var_dump($list->stackTraverse());
+*/
+
+require 'BF.php';
+echo index('hello world', 'o');
+echo strpos('hello world', 'o');
 
 
 
