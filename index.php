@@ -77,11 +77,7 @@ echo $list->getTop();
 var_dump($list->stackTraverse());
 */
 
+require 'search.php';
 
-
-require 'sort.php';
-
-$arr = [6,3,8,5,4,93,1,7,10,35,23,34,122,2,9,0];
-
-
-print_r(quickSort($arr));
+$arr = [1,22,44,56,87,98,554,654,754,5555];
+echo(halfSearch(56, $arr));
