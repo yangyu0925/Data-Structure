@@ -180,3 +180,4 @@ class SqStr{
         return $this->str;
     }
 }
+ 
